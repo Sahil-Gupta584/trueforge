@@ -1,4 +1,5 @@
 import { OpenAPIHono, type RouteHandler } from '@hono/zod-openapi';
+import { DaytonaError } from '@daytona/sdk';
 import { withTimeout } from '@truefoundry/trueforge-core/core';
 import type { Logger } from 'winston';
 import type { ISandboxProviderStore, SandboxProviderRecord } from '../db/sandboxProviderStore';
@@ -104,7 +105,9 @@ export function createSandboxProvidersRouter<TTransaction>(deps: SandboxProvider
         return c.json({ error: { message: 'API key is required' } }, 400);
       }
       if (isDaytonaAuthError(error)) {
-        return c.json({ error: { message: 'Daytona rejected the API key — check the credentials' } }, 422);
+        return c.json({ error: { message: "Daytona rejected the API key — check the credentials" } }, 422);
+      } else if (error instanceof DaytonaError && error.statusCode === 403) {
+        return c.json({ error: { message: "Daytona rejected the request: insufficient permissions (check write:snapshots)" } }, 403);
       }
       throw error;
     }
