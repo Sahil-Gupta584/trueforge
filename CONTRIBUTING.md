@@ -242,6 +242,12 @@ Prettier and ESLint run as pre-commit hooks via husky + lint-staged.
 
 ## Pull requests
 
+When opening a pull request, please use the following title format:
+
+`Fixes #<issue-number>: <PR title>`
+
+For example: `Fixes #123: Add rename chat option`
+
 1. Fork (or branch) and create a topic branch: `git checkout -b my-fix`.
 2. Make your change, with tests where it makes sense. Do not commit generated OpenAPI/SDK output (forks: source only; `main` regenerates after merge).
 3. Make sure `pnpm build`, `pnpm test`, `pnpm typecheck`, `pnpm lint:ci`, and `pnpm format:check` pass - CI runs exactly these.

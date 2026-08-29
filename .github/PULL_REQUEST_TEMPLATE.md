@@ -1,5 +1,9 @@
 ## Summary
 
+**Recommended PR title format**: `Fixes #<issue-number>: <PR title>`
+
+
+
 <!-- What does this PR change, and why? Link the related issue if there is one. -->
 
 Closes #<add-issue-number-here>
